@@ -1,29 +1,69 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const SidebarContainer = styled.aside`
+  width: 16rem;
+  height: 100vh;
+  background-color: ${props => props.theme.colors.white};
+  box-shadow: ${props => props.theme.shadows.sm};
+`
+
+const SidebarContent = styled.div`
+  height: 100%;
+  padding: 1rem 0.75rem;
+  overflow-y: auto;
+`
+
+const NavList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`
+
+const NavItem = styled.li``
+
+const NavLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: ${props => props.theme.colors.gray[600]};
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all ${props => props.theme.transitions.default};
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+    background-color: ${props => props.theme.colors.accent};
+  }
+`
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 h-screen bg-white shadow-md">
-      <div className="h-full px-3 py-4 overflow-y-auto">
-        <ul className="space-y-2">
-          <li>
-            <Link to="/" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+    <SidebarContainer>
+      <SidebarContent>
+        <NavList>
+          <NavItem>
+            <NavLink to="/">
               <span>Home</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/projects" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/projects">
               <span>Projects</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/contact">
               <span>Contact</span>
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </aside>
+            </NavLink>
+          </NavItem>
+        </NavList>
+      </SidebarContent>
+    </SidebarContainer>
   )
 }
 
