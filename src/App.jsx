@@ -7,8 +7,8 @@ import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
-import Contact from './pages/Contact'
-import Projects from './pages/Projects'
+import PickUpLines from './pages/PickUpLines'
+import FAQ from './pages/FAQ'
 
 const AppContainer = styled.div`
   display: flex;
@@ -49,8 +49,8 @@ function App() {
             <Main>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/contact" element={<Contact />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/pickup-lines" element={<PickUpLines />} />
               </Routes>
             </Main>
             <Footer />

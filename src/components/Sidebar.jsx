@@ -95,8 +95,8 @@ const Sidebar = ({ isOpen, onClose }) => {
           <Logo to="/" onClick={onClose}>Sheila Labs</Logo>
           <NavLinks>
             <NavLink to="/" onClick={onClose}>Home</NavLink>
-            <NavLink to="/projects" onClick={onClose}>Projects</NavLink>
-            <NavLink to="/contact" onClick={onClose}>Contact</NavLink>
+            <NavLink to="/faq" onClick={onClose}>FAQ</NavLink>
+            <NavLink to="/pickup-lines" onClick={onClose}>Pick-Up Lines</NavLink>
           </NavLinks>
         </SidebarContent>
       </SidebarContainer>

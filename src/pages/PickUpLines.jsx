@@ -144,7 +144,7 @@ const Button = styled.button`
   }
 `
 
-const Contact = () => {
+function PickUpLines() {
   return (
     <PageContainer>
       <ContentContainer>
@@ -157,13 +157,13 @@ const Contact = () => {
             Feel free to reach out using the contact form or through any of the methods below.
           </InfoText>
           <ContactItem>
-            📍 123 Business Street, Tech City, TC 12345
+            123 Business Street, Tech City, TC 12345
           </ContactItem>
           <ContactItem>
-            📧 hello@sheilalabs.com
+            hello@sheilalabs.com
           </ContactItem>
           <ContactItem>
-            📞 (555) 123-4567
+            (555) 123-4567
           </ContactItem>
         </ContactInfo>
 
@@ -203,4 +203,4 @@ const Contact = () => {
   )
 }
 
-export default Contact
+export default PickUpLines

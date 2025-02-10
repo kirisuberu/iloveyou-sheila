@@ -92,8 +92,8 @@ const Navbar = ({ onMenuClick }) => {
           </LogoContainer>
           <NavLinks>
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/projects">Projects</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/faq">FAQ</NavLink>
+            <NavLink to="/pickup-lines">Pick-Up Lines</NavLink>
           </NavLinks>
           <MenuButton onClick={onMenuClick} aria-label="Toggle menu">
             <svg

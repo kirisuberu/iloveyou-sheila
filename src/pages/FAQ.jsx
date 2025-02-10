@@ -76,7 +76,7 @@ const Tag = styled.span`
   }
 `
 
-const Projects = () => {
+function FAQ() {
   const projects = [
     {
       id: 1,
@@ -118,4 +118,4 @@ const Projects = () => {
   )
 }
 
-export default Projects
+export default FAQ
