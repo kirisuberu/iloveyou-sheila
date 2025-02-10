@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1200px;
+
   margin: 0 auto;
   padding: 2rem;
 `
@@ -14,13 +14,19 @@ const HighlightSection = styled.section`
   background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.secondary});
   border-radius: 1rem;
   margin-bottom: 4rem;
-  color: white;
+  color: ${props => props.theme.colors.white} !important;
+
+  h1, p {
+    color: ${props => props.theme.colors.white} !important;
+  }
 `
 
 const HighlightTitle = styled.h1`
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
+  color: ${props => props.theme.colors.white} !important;
+  fill: ${props => props.theme.colors.white};
   
   @media (max-width: 768px) {
     font-size: 2rem;
@@ -32,6 +38,7 @@ const HighlightText = styled.p`
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+  color: ${props => props.theme.colors.white} !important;
   
   @media (max-width: 768px) {
     font-size: 1rem;
