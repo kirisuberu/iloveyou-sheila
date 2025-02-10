@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import profileImage from '../assets/img/grad2-square.jpg'
 
 const Container = styled.div`
   width: 100%;
@@ -67,11 +68,11 @@ const ProfileImage = styled.div`
   overflow: hidden;
   flex-shrink: 0;
   background-color: ${props => props.theme.colors.accent};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem;
-  color: ${props => props.theme.colors.primary};
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `
 
 const ProfileContent = styled.div`
@@ -121,34 +122,44 @@ const Home = () => {
   return (
     <Container>
       <HighlightSection>
-        <HighlightTitle>Welcome to Sheila's World</HighlightTitle>
+        <HighlightTitle>I love you my Valentine!</HighlightTitle>
         <HighlightText>
-          Discover the perfect blend of creativity and charm. Let's make your day brighter with
-          a collection of heartwarming pick-up lines and answers to your burning questions.
+          I am so excited to share this special day with you! I hope you find the best pick-up lines and answers to your
+          burning questions.
         </HighlightText>
       </HighlightSection>
 
       <ProfileSection>
-        <ProfileImage>💝</ProfileImage>
+        <ProfileImage>
+          <img src={profileImage} alt="Sheila's Profile" />
+        </ProfileImage>
         <ProfileContent>
           <ProfileName>Sheila</ProfileName>
           <ProfileDescription>
-            Hey there! I'm Sheila, your go-to source for smiles and laughter. Whether you're looking for
-            the perfect ice-breaker or just need a mood boost, I've got you covered with a collection of
-            carefully curated pick-up lines and answers to frequently asked questions.
+            Hey there! I'm Sheila, your go-to source for smiles and laughter. I am a perfect blend of
+            creativity and charm, and I'm here to make your day brighter with a collection of heartwarming
+            pick-up lines and answers to your burning questions.
           </ProfileDescription>
           <ProfileStats>
             <StatItem>
-              <StatNumber>100+</StatNumber>
-              <StatLabel>Pick-up Lines</StatLabel>
+              <StatNumber>25</StatNumber>
+              <StatLabel>Years Old</StatLabel>
             </StatItem>
             <StatItem>
-              <StatNumber>50+</StatNumber>
-              <StatLabel>FAQ Answers</StatLabel>
+              <StatNumber>1</StatNumber>
+              <StatLabel>Boyfriend</StatLabel>
+            </StatItem>
+            <StatItem>
+              <StatNumber>0</StatNumber>
+              <StatLabel>Kabit</StatLabel>
             </StatItem>
             <StatItem>
               <StatNumber>∞</StatNumber>
               <StatLabel>Smiles Shared</StatLabel>
+            </StatItem>
+            <StatItem>
+              <StatNumber>∞</StatNumber>
+              <StatLabel>K-Pop Crushes</StatLabel>
             </StatItem>
           </ProfileStats>
         </ProfileContent>

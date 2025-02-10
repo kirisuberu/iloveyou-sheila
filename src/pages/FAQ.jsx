@@ -100,7 +100,7 @@ function FAQ() {
 
   return (
     <Container>
-      <Title>Our Projects</Title>
+      <Title>Frequently Asked Questions</Title>
       <ProjectGrid>
         {projects.map((project) => (
           <ProjectCard key={project.id}>
