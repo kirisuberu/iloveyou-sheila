@@ -49,18 +49,22 @@ const NavLinks = styled.div`
 `
 
 const NavLink = styled(Link)`
-  display: inline-flex;
-  align-items: center;
-  padding: 0 0.25rem;
-  color: ${props => props.theme.colors.gray[600]};
   text-decoration: none;
-  border-bottom: 2px solid transparent;
-  height: 100%;
+  color: ${props => props.theme.colors.gray[600]};
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
   transition: all ${props => props.theme.transitions.default};
+
+  &.active {
+    background-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.white};
+    font-weight: 600;
+  }
 
   &:hover {
     color: ${props => props.theme.colors.primary};
-    border-bottom-color: ${props => props.theme.colors.primary};
+    background-color: ${props => props.theme.colors.accent}40;
   }
 `
 
@@ -93,10 +97,11 @@ const Navbar = ({ onMenuClick }) => {
             <Logo to="/">Sheila Labs</Logo>
           </LogoContainer>
           <NavLinks>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/facts">Facts</NavLink>
-            <NavLink to="/pickup-lines">Pick-Up Lines</NavLink>
-            <NavLink to="/author">Author</NavLink>
+            <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
+            <NavLink to="/facts" className={({ isActive }) => isActive ? 'active' : ''}>Facts</NavLink>
+            <NavLink to="/pickup-lines" className={({ isActive }) => isActive ? 'active' : ''}>Pick-Up Lines</NavLink>
+            <NavLink to="/favepics" className={({ isActive }) => isActive ? 'active' : ''}>Fave Pics</NavLink>
+            <NavLink to="/author" className={({ isActive }) => isActive ? 'active' : ''}>Author</NavLink>
           </NavLinks>
           <MenuButton onClick={onMenuClick} aria-label="Toggle menu">
             <Menu size={24} />

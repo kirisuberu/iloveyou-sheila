@@ -45,9 +45,16 @@ const NavLink = styled(Link)`
   text-decoration: none;
   border-radius: 0.375rem;
   transition: all ${props => props.theme.transitions.default};
+  font-weight: 500;
+
+  &.active {
+    background-color: ${props => props.theme.colors.accent};
+    color: ${props => props.theme.colors.primary};
+    font-weight: 600;
+  }
 
   &:hover {
-    background-color: ${props => props.theme.colors.accent};
+    background-color: ${props => props.theme.colors.accent}40;
     color: ${props => props.theme.colors.primary};
   }
 `
@@ -94,10 +101,11 @@ const Sidebar = ({ isOpen, onClose }) => {
           <CloseButton onClick={onClose}>&times;</CloseButton>
           <Logo to="/" onClick={onClose}>Sheila Labs</Logo>
           <NavLinks>
-            <NavLink to="/" onClick={onClose}>Home</NavLink>
-            <NavLink to="/facts" onClick={onClose}>Facts</NavLink>
-            <NavLink to="/pickup-lines" onClick={onClose}>Pick-Up Lines</NavLink>
-            <NavLink to="/author" onClick={onClose}>Author</NavLink>
+            <NavLink to="/" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
+            <NavLink to="/facts" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Facts</NavLink>
+            <NavLink to="/pickup-lines" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Pick-Up Lines</NavLink>
+            <NavLink to="/favepics" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Fave Pics</NavLink>
+            <NavLink to="/author" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Author</NavLink>
           </NavLinks>
         </SidebarContent>
       </SidebarContainer>

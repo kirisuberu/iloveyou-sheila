@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import PickUpLines from './pages/PickUpLines'
 import Facts from './pages/Facts'
 import Author from './pages/Author'
+import FavePics from './pages/FavePics'
 
 const AppContainer = styled.div`
   display: flex;
@@ -53,6 +54,7 @@ function App() {
                 <Route path="/pickup-lines" element={<PickUpLines />} />
                 <Route path="/facts" element={<Facts />} />
                 <Route path="/author" element={<Author />} />
+                <Route path="/favepics" element={<FavePics />} />
               </Routes>
             </Main>
             <Footer />
