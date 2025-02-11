@@ -76,7 +76,7 @@ const Tag = styled.span`
   }
 `
 
-function FAQ() {
+function Facts() {
   const projects = [
     {
       id: 1,
@@ -100,7 +100,7 @@ function FAQ() {
 
   return (
     <Container>
-      <Title>Frequently Asked Questions</Title>
+      <Title>Facts</Title>
       <ProjectGrid>
         {projects.map((project) => (
           <ProjectCard key={project.id}>
@@ -118,4 +118,4 @@ function FAQ() {
   )
 }
 
-export default FAQ
+export default Facts

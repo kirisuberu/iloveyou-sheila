@@ -8,7 +8,8 @@ import Sidebar from './components/Sidebar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import PickUpLines from './pages/PickUpLines'
-import FAQ from './pages/FAQ'
+import Facts from './pages/Facts'
+import Author from './pages/Author'
 
 const AppContainer = styled.div`
   display: flex;
@@ -49,8 +50,9 @@ function App() {
             <Main>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/faq" element={<FAQ />} />
                 <Route path="/pickup-lines" element={<PickUpLines />} />
+                <Route path="/facts" element={<Facts />} />
+                <Route path="/author" element={<Author />} />
               </Routes>
             </Main>
             <Footer />

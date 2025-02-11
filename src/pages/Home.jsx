@@ -12,13 +12,60 @@ const Container = styled.div`
 const HighlightSection = styled.section`
   text-align: center;
   padding: 4rem 1rem;
-  background: linear-gradient(135deg, ${props => props.theme.colors.primary}, ${props => props.theme.colors.secondary});
+  background: linear-gradient(135deg, 
+    ${props => `${props.theme.colors.primary}80`}, 
+    ${props => `${props.theme.colors.secondary}80`}
+  );
+  background-image: 
+    repeating-linear-gradient(45deg, 
+      ${props => `${props.theme.colors.primary}10`} 0px,
+      ${props => `${props.theme.colors.primary}10`} 2px,
+      transparent 2px,
+      transparent 10px
+    ),
+    linear-gradient(135deg, 
+      ${props => `${props.theme.colors.primary}80`}, 
+      ${props => `${props.theme.colors.secondary}80`}
+    );
   border-radius: 1rem;
   margin-bottom: 4rem;
   color: ${props => props.theme.colors.white} !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
 
   h1, p {
     color: ${props => props.theme.colors.white} !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+`
+
+const CustomCursor = styled.div`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${props => props.theme.colors.primary};
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: pulse 1s infinite alternate;
+
+  @keyframes pulse {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.3);
+    }
   }
 `
 
@@ -108,7 +155,7 @@ const StatItem = styled.div`
 `
 
 const StatNumber = styled.div`
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: ${props => props.theme.colors.primary};
 `
@@ -119,13 +166,41 @@ const StatLabel = styled.div`
 `
 
 const Home = () => {
+  const [cursorPos, setCursorPos] = React.useState({ x: 0, y: 0 });
+  const [showCursor, setShowCursor] = React.useState(false);
+  const sectionRef = React.useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (sectionRef.current) {
+      const rect = sectionRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      setCursorPos({ x, y });
+    }
+  };
+
   return (
     <Container>
-      <HighlightSection>
+      <HighlightSection 
+        ref={sectionRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setShowCursor(true)}
+        onMouseLeave={() => setShowCursor(false)}
+      >
+        {showCursor && (
+          <CustomCursor
+            style={{
+              left: cursorPos.x,
+              top: cursorPos.y,
+              position: 'absolute'
+            }}
+          >
+            ♥
+          </CustomCursor>
+        )}
         <HighlightTitle>I love you my Valentine!</HighlightTitle>
         <HighlightText>
-          I am so excited to share this special day with you! I hope you find the best pick-up lines and answers to your
-          burning questions.
+          I am so excited to share this special day with you! I hope you find the best pick-up lines, facts, pictures, and author/lover.
         </HighlightText>
       </HighlightSection>
 
@@ -134,12 +209,9 @@ const Home = () => {
           <img src={profileImage} alt="Sheila's Profile" />
         </ProfileImage>
         <ProfileContent>
-          <ProfileName>Sheila</ProfileName>
+          <ProfileName>Sheila Marie M. Junco</ProfileName>
           <ProfileDescription>
-            Hey there! I'm Sheila, your go-to source for smiles and laughter. I am a perfect blend of
-            creativity and charm, and I'm here to make your day brighter with a collection of heartwarming
-            pick-up lines and answers to your burning questions.
-          </ProfileDescription>
+            Hey there! I'm Sheila, your go-to source for smiles and laughter. I am perfect. HAHAHAHAHAH. I love Crisbel also. Sige nalang, kay wala pa man ko nailhan sa akong mga uyab sa Korea kay busy pa sa ilang concerts. So magsettle nalang ko ug mas gwapo --- si Crisbel!        </ProfileDescription>
           <ProfileStats>
             <StatItem>
               <StatNumber>25</StatNumber>
