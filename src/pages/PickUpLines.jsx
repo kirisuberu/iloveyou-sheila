@@ -1,14 +1,15 @@
 import React, { useState, useCallback } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { motion } from 'framer-motion';
 
-const PageContainer = styled.div`
+const PageContainer = styled(motion.div)`
   width: 100%;
   min-height: 100%;
   padding: 2rem;
   background-color: ${props => props.theme.colors.background};
 `
 
-const ContentContainer = styled.div`
+const ContentContainer = styled(motion.div)`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
@@ -19,7 +20,7 @@ const ContentContainer = styled.div`
   }
 `
 
-const Title = styled.h1`
+const Title = styled(motion.h1)`
   font-size: 1.875rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
@@ -149,7 +150,7 @@ const Button = styled.button`
   }
 `
 
-const PickUpLineCard = styled.div`
+const PickUpLineCard = styled(motion.div)`
   background-color: ${props => props.theme.colors.white};
   padding: 1.5rem;
   border-radius: 0.5rem;
@@ -165,14 +166,14 @@ const PickUpLineCard = styled.div`
   }
 `
 
-const PickUpLineText = styled.p`
+const PickUpLineText = styled(motion.p)`
   font-size: 1.125rem;
   color: ${props => props.theme.colors.gray[800]};
   margin-bottom: 0.5rem;
   line-height: 1.6;
 `
 
-const AnswerText = styled.p`
+const AnswerText = styled(motion.p)`
   font-size: 1rem;
   color: ${props => props.theme.colors.primary};
   margin: 0.5rem 0;
@@ -317,7 +318,54 @@ const pickUpLines = [
   }
 ];
 
-function HeartExplosion({ x, y }) {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const titleVariants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
+
+const textVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
+
+const HeartExplosion = ({ x, y }) => {
   const hearts = Array.from({ length: 8 }).map((_, i) => {
     const angle = (i * Math.PI * 2) / 8;
     const tx = Math.cos(angle) * 100;
@@ -381,17 +429,38 @@ function PickUpLines() {
   }, [addHeartExplosion]);
 
   return (
-    <PageContainer>
-      <Title>Pick-up Lines</Title>
-      <ContentContainer>
+    <PageContainer
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <Title variants={titleVariants}>
+        Pick-up Lines
+      </Title>
+      <ContentContainer
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         {pickUpLines.map((line, index) => (
-          <PickUpLineCard key={index}>
-            <PickUpLineText>{line.text}</PickUpLineText>
+          <PickUpLineCard
+            key={index}
+            variants={cardVariants}
+            whileHover={{ 
+              y: -5,
+              transition: { duration: 0.2 }
+            }}
+            whileTap={{ 
+              scale: 0.98,
+              transition: { duration: 0.1 }
+            }}
+          >
+            <PickUpLineText variants={textVariants}>{line.text}</PickUpLineText>
             <Button onClick={(e) => toggleAnswer(index, e)}>
               {visibleAnswers.has(index) ? 'Hide Answer' : 'Show Answer'}
             </Button>
             {visibleAnswers.has(index) && (
-              <AnswerText>{line.answer}</AnswerText>
+              <AnswerText variants={textVariants}>{line.answer}</AnswerText>
             )}
             {(heartAnimations.get(index) || []).map(heart => (
               <HeartExplosion key={heart.id} x={heart.x} y={heart.y} />

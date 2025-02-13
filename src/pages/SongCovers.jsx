@@ -1,27 +1,30 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { motion } from 'framer-motion';
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   padding: 2rem;
-  max-width: 1200px;
+  width: 100vw;
   margin: 0 auto;
 `;
 
-const Title = styled.h1`
+const Title = styled(motion.h1)`
   color: ${props => props.theme.colors.primary};
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2.5rem;
 `;
 
-const Description = styled.p`
+const Description = styled(motion.p)`
   text-align: center;
   color: ${props => props.theme.colors.text};
   margin-bottom: 3rem;
   font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
-const Grid = styled.div`
+const Grid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
@@ -37,7 +40,7 @@ const shimmer = keyframes`
   }
 `;
 
-const Card = styled.div`
+const Card = styled(motion.div)`
   background: white;
   border-radius: 1rem;
   overflow: hidden;
@@ -63,7 +66,7 @@ const Card = styled.div`
   }
 `;
 
-const NoContentMessage = styled.div`
+const NoContentMessage = styled(motion.div)`
   text-align: center;
   padding: 2rem;
   background: ${props => props.theme.colors.accent}20;
@@ -83,25 +86,89 @@ const NoContentMessage = styled.div`
   }
 `;
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const titleVariants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
+
+const messageVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
+
 const SongCovers = () => {
   return (
-    <Container>
-      <Title>Song Covers</Title>
-      <Description>
+    <Container
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <Title variants={titleVariants}>
+        Song Covers
+      </Title>
+      <Description variants={titleVariants}>
         A collection of song covers dedicated to my one and only Sheila. 
-        Each song represents a special moment and feeling in our relationship.
+        
       </Description>
 
-      <NoContentMessage>
+      <NoContentMessage variants={messageVariants}>
         <p>There are no files uploaded yet.</p>
         <span>Mag upload lang ko sunod babab, HEHEHE 😊</span>
       </NoContentMessage>
 
-      <Title as="h2" style={{ fontSize: '2rem' }}>Coming Soon...</Title>
       <Grid>
-        <Card />
-        <Card />
-        <Card />
+        {[1, 2, 3].map((_, index) => (
+          <Card
+            key={index}
+            variants={cardVariants}
+            whileHover={{ 
+              y: -5,
+              transition: { duration: 0.2 }
+            }}
+            whileTap={{ 
+              scale: 0.98,
+              transition: { duration: 0.1 }
+            }}
+          />
+        ))}
       </Grid>
     </Container>
   );

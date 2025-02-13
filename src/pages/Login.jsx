@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -16,7 +17,7 @@ const Container = styled.div`
   );
 `;
 
-const QuizContainer = styled.div`
+const QuizContainer = styled(motion.div)`
   background: white;
   padding: 4rem;
   width: 100%;
@@ -32,7 +33,7 @@ const QuizContainer = styled.div`
   }
 `;
 
-const Question = styled.div`
+const Question = styled(motion.div)`
   margin-bottom: 2rem;
   max-width: 800px;
   width: 100%;
@@ -46,7 +47,7 @@ const Question = styled.div`
   }
 `;
 
-const Select = styled.select`
+const Select = styled(motion.select)`
   padding: 0.8rem;
   border: 2px solid ${props => props.theme.colors.primary}40;
   border-radius: 0.5rem;
@@ -66,7 +67,7 @@ const Select = styled.select`
   }
 `;
 
-const DateSelectGroup = styled.div`
+const DateSelectGroup = styled(motion.div)`
   display: flex;
   gap: 1rem;
   width: 100%;
@@ -76,7 +77,7 @@ const DateSelectGroup = styled.div`
   }
 `;
 
-const Modal = styled.div`
+const Modal = styled(motion.div)`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -101,7 +102,7 @@ const Modal = styled.div`
   }
 `;
 
-const Overlay = styled.div`
+const Overlay = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
@@ -121,21 +122,21 @@ const Overlay = styled.div`
   }
 `;
 
-const ErrorTitle = styled.h2`
+const ErrorTitle = styled(motion.h2)`
   color: ${props => props.theme.colors.primary};
   font-size: 2rem;
   margin-bottom: 1rem;
   font-weight: bold;
 `;
 
-const ErrorMessage = styled.p`
+const ErrorMessage = styled(motion.p)`
   color: ${props => props.theme.colors.text};
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
   line-height: 1.5;
 `;
 
-const CloseButton = styled.button`
+const CloseButton = styled(motion.button)`
   background: ${props => props.theme.colors.primary};
   color: white;
   border: none;
@@ -151,7 +152,7 @@ const CloseButton = styled.button`
   }
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled(motion.button)`
   max-width: 800px;
   width: 100%;
   margin: 2rem auto;
@@ -173,6 +174,60 @@ const SubmitButton = styled.button`
     cursor: not-allowed;
   }
 `;
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut"
+    }
+  }
+};
+
+const buttonVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut"
+    }
+  },
+  tap: {
+    scale: 0.95,
+    transition: {
+      duration: 0.1
+    }
+  }
+};
 
 const questions = [
   {
@@ -302,10 +357,11 @@ const Login = () => {
   const renderQuestion = (q, index) => {
     if (q.type === 'date') {
       return (
-        <DateSelectGroup>
+        <DateSelectGroup variants={itemVariants}>
           <Select
             value={(answers[index]?.month || '')}
             onChange={(e) => handleOptionSelect(index, e.target.value, 'month')}
+            variants={itemVariants}
           >
             {months.map((month) => (
               <option key={month} value={month}>
@@ -316,6 +372,7 @@ const Login = () => {
           <Select
             value={(answers[index]?.day || '')}
             onChange={(e) => handleOptionSelect(index, e.target.value, 'day')}
+            variants={itemVariants}
           >
             {generateDays().map((day) => (
               <option key={day} value={day}>
@@ -326,6 +383,7 @@ const Login = () => {
           <Select
             value={(answers[index]?.year || '')}
             onChange={(e) => handleOptionSelect(index, e.target.value, 'year')}
+            variants={itemVariants}
           >
             {generateYears().map((year) => (
               <option key={year} value={year}>
@@ -341,6 +399,7 @@ const Login = () => {
       <Select
         value={answers[index] || ''}
         onChange={(e) => handleOptionSelect(index, e.target.value)}
+        variants={itemVariants}
       >
         {q.options.map((option) => (
           <option key={option} value={option}>
@@ -352,8 +411,12 @@ const Login = () => {
   };
 
   return (
-    <Container>
-      <QuizContainer>
+    <Container
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <QuizContainer variants={cardVariants}>
         <h2 style={{ 
           textAlign: 'center', 
           marginBottom: '2rem',
@@ -376,7 +439,7 @@ const Login = () => {
         </p>
         
         {questions.map((q, index) => (
-          <Question key={index}>
+          <Question key={index} variants={itemVariants}>
             <h3>{q.question}</h3>
             {renderQuestion(q, index)}
           </Question>
@@ -385,20 +448,37 @@ const Login = () => {
         <SubmitButton 
           onClick={handleSubmit}
           disabled={!allQuestionsAnswered}
+          variants={buttonVariants}
+          whileHover={{ scale: 1.05 }}
+          whileTap="tap"
         >
           Submit Answers
         </SubmitButton>
 
         {showError && (
           <>
-            <Overlay onClick={handleCloseError} />
-            <Modal>
-              <ErrorTitle>❌ Access Denied</ErrorTitle>
-              <ErrorMessage>
+            <Overlay 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={handleCloseError} 
+            />
+            <Modal
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              <ErrorTitle variants={itemVariants}>❌ Access Denied</ErrorTitle>
+              <ErrorMessage variants={itemVariants}>
                 <p style={{ marginBottom: '1rem', fontSize: '1.5rem', fontWeight: 'bold' }}>Error 404: Love not Found</p>
                 <p style={{ marginBottom: '1rem', fontSize: '1.2rem' }}>Sorry, some answers are incorrect. Ibig sabihin, di mo ko love, or hindi ikaw si Sheila. 😡😡😡 </p>
               </ErrorMessage>
-              <CloseButton onClick={handleCloseError}>
+              <CloseButton 
+                onClick={handleCloseError}
+                variants={buttonVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap="tap"
+              >
                 Try Again
               </CloseButton>
             </Modal>
