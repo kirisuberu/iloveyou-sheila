@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import { theme } from './theme'
 import { GlobalStyle } from './globalStyles'
@@ -11,6 +11,7 @@ import PickUpLines from './pages/PickUpLines'
 import Facts from './pages/Facts'
 import Author from './pages/Author'
 import FavePics from './pages/FavePics'
+import Login from './pages/Login'
 
 const AppContainer = styled.div`
   display: flex;
@@ -45,20 +46,29 @@ function App() {
       <GlobalStyle />
       <Router>
         <AppContainer>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/*"
+              element={
+                <MainContent>
+                  <Navbar onMenuClick={toggleSidebar} />
+                  <Main>
+                    <Routes>
+                      <Route path="/home" element={<Home />} />
+                      <Route path="/pickup-lines" element={<PickUpLines />} />
+                      <Route path="/facts" element={<Facts />} />
+                      <Route path="/author" element={<Author />} />
+                      <Route path="/favepics" element={<FavePics />} />
+                      <Route path="/" element={<Navigate to="/login" replace />} />
+                    </Routes>
+                  </Main>
+                  <Footer />
+                </MainContent>
+              }
+            />
+          </Routes>
           <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
-          <MainContent>
-            <Navbar onMenuClick={toggleSidebar} />
-            <Main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/pickup-lines" element={<PickUpLines />} />
-                <Route path="/facts" element={<Facts />} />
-                <Route path="/author" element={<Author />} />
-                <Route path="/favepics" element={<FavePics />} />
-              </Routes>
-            </Main>
-            <Footer />
-          </MainContent>
         </AppContainer>
       </Router>
     </ThemeProvider>

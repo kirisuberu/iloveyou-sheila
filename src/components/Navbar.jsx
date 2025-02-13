@@ -94,7 +94,7 @@ const Navbar = ({ onMenuClick }) => {
       <Container>
         <FlexContainer>
           <LogoContainer>
-            <Logo to="/">Sheila Labs</Logo>
+            <Logo to="/">Sheilalabs</Logo>
           </LogoContainer>
           <NavLinks>
             <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>

@@ -1,119 +1,148 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   padding: 2rem;
+  min-height: 100vh;
+  background-color: ${props => props.theme.colors.background};
+  margin: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden;
 `
 
 const Title = styled.h1`
-  font-size: 1.875rem;
+  font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
   color: ${props => props.theme.colors.secondary};
 `
 
-const ProjectGrid = styled.div`
+const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 1.5rem;
-  
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  @media (min-width: 1280px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  width: 100%;
+
+  margin: 0 auto;
 `
 
-const ProjectCard = styled.div`
-  background-color: ${props => props.theme.colors.white};
-  border-radius: 0.5rem;
-  box-shadow: ${props => props.theme.shadows.sm};
-  padding: 1.5rem;
-  transition: all ${props => props.theme.transitions.default};
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${props => props.theme.shadows.md};
-  }
+const CardContainer = styled.div`
+  perspective: 1000px;
+  height: 400px;
 `
 
-const ProjectTitle = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: ${props => props.theme.colors.secondary};
+const Card = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  ${props => props.isFlipped && `transform: rotateY(180deg);`}
 `
 
-const ProjectDescription = styled.p`
-  color: ${props => props.theme.colors.gray[600]};
+const CardSide = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: ${props => props.theme.colors.white};
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`
+
+const CardFront = styled(CardSide)`
+`
+
+const CardBack = styled(CardSide)`
+  transform: rotateY(180deg);
+  background: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.white};
+`
+
+const CardTitle = styled.h2`
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: inherit;
+`
+
+const CardContent = styled.p`
+  font-size: 1.1rem;
+  line-height: 1.6;
+`
+
+const CardIcon = styled.div`
+  font-size: 3rem;
   margin-bottom: 1rem;
 `
 
-const TagContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-`
-
-const Tag = styled.span`
-  background-color: ${props => props.theme.colors.accent};
-  color: ${props => props.theme.colors.primary};
-  font-size: 0.875rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  transition: all ${props => props.theme.transitions.default};
-
-  &:hover {
-    background-color: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.white};
-  }
-`
-
 function Facts() {
-  const projects = [
+  const [flippedCards, setFlippedCards] = useState({});
+
+  const facts = [
     {
       id: 1,
-      title: 'Project One',
-      description: 'Description of project one goes here.',
-      tech: ['React', 'Node.js', 'MongoDB']
+      icon: "💝",
+      frontTitle: "Anniversary",
+      frontContent: "Click to discover!",
+      backTitle: "September 06",
+      backContent: "This was the reconciliation date that changed my life forever."
     },
     {
       id: 2,
-      title: 'Project Two',
-      description: 'Description of project two goes here.',
-      tech: ['React', 'Firebase', 'Tailwind CSS']
+      icon: "🎵",
+      frontTitle: "Notable Song #1",
+      frontContent: "Click to discover!",
+      backTitle: "Musical Connection",
+      backContent: "The melody that brings us together and reminds us of our special moments..."
     },
     {
       id: 3,
-      title: 'Project Three',
-      description: 'Description of project three goes here.',
-      tech: ['Next.js', 'PostgreSQL', 'TypeScript']
+      icon: "✨",
+      frontTitle: "Special Moments",
+      frontContent: "Tap to reveal!",
+      backTitle: "Memories",
+      backContent: "From our first date to our most adventurous times together, every moment is treasured..."
     }
-  ]
+  ];
+
+  const handleCardFlip = (id) => {
+    setFlippedCards(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
 
   return (
     <Container>
-      <Title>Facts</Title>
-      <ProjectGrid>
-        {projects.map((project) => (
-          <ProjectCard key={project.id}>
-            <ProjectTitle>{project.title}</ProjectTitle>
-            <ProjectDescription>{project.description}</ProjectDescription>
-            <TagContainer>
-              {project.tech.map((tech, index) => (
-                <Tag key={index}>{tech}</Tag>
-              ))}
-            </TagContainer>
-          </ProjectCard>
+      <Title>Our Love Story</Title>
+      <CardGrid>
+        {facts.map((fact) => (
+          <CardContainer key={fact.id} onClick={() => handleCardFlip(fact.id)}>
+            <Card isFlipped={flippedCards[fact.id]}>
+              <CardFront>
+                <CardIcon>{fact.icon}</CardIcon>
+                <CardTitle>{fact.frontTitle}</CardTitle>
+                <CardContent>{fact.frontContent}</CardContent>
+              </CardFront>
+              <CardBack>
+                <CardTitle>{fact.backTitle}</CardTitle>
+                <CardContent>{fact.backContent}</CardContent>
+              </CardBack>
+            </Card>
+          </CardContainer>
         ))}
-      </ProjectGrid>
+      </CardGrid>
     </Container>
   )
 }

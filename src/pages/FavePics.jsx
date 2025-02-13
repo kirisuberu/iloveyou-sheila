@@ -71,7 +71,7 @@ const FavePics = () => {
   };
 
   const images = [
-    { src: crisImg, alt: 'Cris' },
+
     { src: grad1Img, alt: 'Graduation 1' },
     { src: grad2SquareImg, alt: 'Graduation 2 Square' },
     { src: grad2Img, alt: 'Graduation 2' },

@@ -198,7 +198,7 @@ const Home = () => {
             ♥
           </CustomCursor>
         )}
-        <HighlightTitle>I love you my Valentine!</HighlightTitle>
+        <HighlightTitle>I LOVE YOU, SHEILA!</HighlightTitle>
         <HighlightText>
           I am so excited to share this special day with you! I hope you find the best pick-up lines, facts, pictures, and author/lover.
         </HighlightText>

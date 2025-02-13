@@ -52,10 +52,17 @@ const ProfileImage = styled.img`
 `
 
 const Name = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: ${props => props.theme.colors.primary};
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+`
+
+const Nickname = styled.h2`
+  font-size: 1.25rem;
+  color: #666;
   margin-bottom: 1rem;
+  font-style: italic;
 `
 
 const Title = styled.h2`
@@ -146,7 +153,9 @@ const Author = () => {
             />
           </ImageContainer>
           <Name>Crisbel A. Mendoza</Name>
-          <Title>Developer of Sheilalabs Website</Title>
+          <Nickname>"Papa de Azucar"</Nickname>
+          <Nickname>"Codename: kirisuberu"</Nickname>
+          <Title style={{marginBottom: '0'}}>Developer of Sheilalabs Website</Title>
           <Title>Lover of Sheila</Title>
         </ProfileSection>
 
