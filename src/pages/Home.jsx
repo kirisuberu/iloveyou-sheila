@@ -200,7 +200,7 @@ const Home = () => {
         )}
         <HighlightTitle>I LOVE YOU, SHEILA!</HighlightTitle>
         <HighlightText>
-          I am so excited to share this special day with you! I hope you find the best pick-up lines, facts, pictures, and author/lover.
+        Hello Love, Babab, Baby, my love with million names but the only one for my life and my heart. I am sorry, I became so unavailable lately. Actually, this is the main reason why I overstay in the office HAHAHA, para mahimo ni nga website para sa imuha. You know that I am broke, but since I am also developing my web developing skills, might as well use this skill and leverage it to create something unique. I will be updating this website from time to time, and add more contents. But for now, enjoy your website. I love you so so much, to the point that it brings the feel of missing and solitude.
         </HighlightText>
       </HighlightSection>
 

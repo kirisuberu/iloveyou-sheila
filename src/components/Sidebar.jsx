@@ -99,13 +99,12 @@ const Sidebar = ({ isOpen, onClose }) => {
       <SidebarContainer isOpen={isOpen}>
         <SidebarContent>
           <CloseButton onClick={onClose}>&times;</CloseButton>
-          <Logo to="/" onClick={onClose}>Sheila Labs</Logo>
+          <Logo to="/">Sheilalabs</Logo>
           <NavLinks>
-            <NavLink to="/" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
-            <NavLink to="/facts" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Facts</NavLink>
-            <NavLink to="/pickup-lines" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Pick-Up Lines</NavLink>
-            <NavLink to="/favepics" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Fave Pics</NavLink>
-            <NavLink to="/author" onClick={onClose} className={({ isActive }) => isActive ? 'active' : ''}>Author</NavLink>
+            <NavLink to="/home" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
+            <NavLink to="/pickup-lines" className={({ isActive }) => isActive ? 'active' : ''}>Pick-up Lines</NavLink>
+            <NavLink to="/author" className={({ isActive }) => isActive ? 'active' : ''}>Author</NavLink>
+            <NavLink to="/favepics" className={({ isActive }) => isActive ? 'active' : ''}>Favorite Pictures</NavLink>
           </NavLinks>
         </SidebarContent>
       </SidebarContainer>

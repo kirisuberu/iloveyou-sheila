@@ -97,13 +97,13 @@ const Navbar = ({ onMenuClick }) => {
             <Logo to="/">Sheilalabs</Logo>
           </LogoContainer>
           <NavLinks>
-            <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
-            <NavLink to="/facts" className={({ isActive }) => isActive ? 'active' : ''}>Facts</NavLink>
-            <NavLink to="/pickup-lines" className={({ isActive }) => isActive ? 'active' : ''}>Pick-Up Lines</NavLink>
-            <NavLink to="/favepics" className={({ isActive }) => isActive ? 'active' : ''}>Fave Pics</NavLink>
+            <NavLink to="/home" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
+            <NavLink to="/pickup-lines" className={({ isActive }) => isActive ? 'active' : ''}>Pick-up Lines</NavLink>
+            
+            <NavLink to="/favepics" className={({ isActive }) => isActive ? 'active' : ''}>Favorite Pictures</NavLink>
             <NavLink to="/author" className={({ isActive }) => isActive ? 'active' : ''}>Author</NavLink>
           </NavLinks>
-          <MenuButton onClick={onMenuClick} aria-label="Toggle menu">
+          <MenuButton onClick={onMenuClick}>
             <Menu size={24} />
           </MenuButton>
         </FlexContainer>

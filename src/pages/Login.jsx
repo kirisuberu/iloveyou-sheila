@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Container = styled.div`
   width: 100vw;
@@ -228,8 +229,18 @@ const generateYears = () => {
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login, checkLoginStatus } = useAuth();
   const [answers, setAnswers] = useState({});
   const [showError, setShowError] = useState(false);
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (checkLoginStatus()) {
+      const from = location.state?.from || '/home';
+      navigate(from);
+    }
+  }, []);
 
   const handleCloseError = () => {
     setShowError(false);
@@ -266,7 +277,11 @@ const Login = () => {
     });
 
     if (allCorrect) {
-      navigate('/home');
+      login();
+      // Reset form
+      setAnswers({});
+      // Just refresh the page
+      window.location.reload();
     } else {
       setShowError(true);
     }

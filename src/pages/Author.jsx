@@ -194,7 +194,7 @@ const Author = () => {
                 <li>🎨 Drawing while Loving Sheila</li>
                 <li>🎮 Gaming while Loving Sheila</li>
                 <li>🎵 Listening to music while Loving Sheila</li>
-                <li>🎵 Programming while Loving Sheila</li>
+                <li>👨‍💻Programming while Loving Sheila</li>
                 <li>❤️ LOVIIINNNNGGGG SHEEEIILLLLLAAAA!!</li>
               </ul>
             </CardContent>
