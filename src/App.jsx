@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import PickUpLines from './pages/PickUpLines'
 import Author from './pages/Author'
 import FavePics from './pages/FavePics'
+import SongCovers from './pages/SongCovers'
 import Login from './pages/Login'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { useLocation } from 'react-router-dom'
@@ -75,14 +76,19 @@ function App() {
                       <PickUpLines />
                     </ProtectedRoute>
                   } />
-                  <Route path="/author" element={
+                  <Route path="/song-covers" element={
                     <ProtectedRoute>
-                      <Author />
+                      <SongCovers />
                     </ProtectedRoute>
                   } />
                   <Route path="/favepics" element={
                     <ProtectedRoute>
                       <FavePics />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/author" element={
+                    <ProtectedRoute>
+                      <Author />
                     </ProtectedRoute>
                   } />
                   <Route path="/" element={<Navigate to="/login" replace />} />

@@ -99,7 +99,7 @@ const Navbar = ({ onMenuClick }) => {
           <NavLinks>
             <NavLink to="/home" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
             <NavLink to="/pickup-lines" className={({ isActive }) => isActive ? 'active' : ''}>Pick-up Lines</NavLink>
-            
+            <NavLink to="/song-covers" className={({ isActive }) => isActive ? 'active' : ''}>Song Covers</NavLink>
             <NavLink to="/favepics" className={({ isActive }) => isActive ? 'active' : ''}>Favorite Pictures</NavLink>
             <NavLink to="/author" className={({ isActive }) => isActive ? 'active' : ''}>Author</NavLink>
           </NavLinks>
