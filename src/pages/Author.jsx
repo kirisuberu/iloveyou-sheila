@@ -1,213 +1,227 @@
-import React from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import profileImage from '../assets/img/grad2-square.jpg';
+import React from 'react'
+import styled from 'styled-components'
+import profileImage from '../assets/img/cris.jpg'
+import { Heart, Sparkles, Star, HandshakeIcon, Mail, Github } from 'lucide-react'
 
-const Container = styled(motion.div)`
+const PageContainer = styled.div`
+  min-height: screen;
+  background: linear-gradient(135deg, #fce7f3 0%, #fff1f2 50%, #fff 100%);
   padding: 2rem;
-  max-width: 1200px;
+`
+
+const ContentWrapper = styled.div`
+  width: 100%;
   margin: 0 auto;
-`;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-const ProfileSection = styled(motion.section)`
+  @media (min-width: 768px) {
+    padding: 4rem 2rem;
+  }
+`
+
+const ProfileSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin-bottom: 4rem;
-`;
+  margin-bottom: 3rem;
+`
 
-const ProfileImage = styled(motion.img)`
+const ImageContainer = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  object-fit: cover;
+  overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   margin-bottom: 2rem;
-  border: 4px solid ${props => props.theme.colors.primary};
-`;
+  
+  @media (min-width: 768px) {
+    width: 250px;
+    height: 250px;
+  }
+`
 
-const Name = styled(motion.h1)`
-  font-size: 2.5rem;
+const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
+
+const Name = styled.h1`
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+`
+
+const Nickname = styled.h2`
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 1rem;
+  font-style: italic;
+`
+
+const Title = styled.h2`
+  font-size: 1.25rem;
+  color: ${props => props.theme.colors.gray[600]};
+  margin-bottom: 2rem;
+`
+
+const Grid = styled.div`
+  display: grid;
+  gap: 2rem;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`
+
+const Card = styled.div`
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+`
+
+const CardTitle = styled.h3`
+  font-size: 1.5rem;
+  font-weight: 600;
   color: ${props => props.theme.colors.primary};
   margin-bottom: 1rem;
-`;
-
-const Title = styled(motion.h2)`
-  font-size: 1.5rem;
-  color: ${props => props.theme.colors.secondary};
-  margin-bottom: 2rem;
-`;
-
-const Bio = styled(motion.p)`
-  font-size: 1.1rem;
-  color: ${props => props.theme.colors.text};
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  line-height: 1.6;
-`;
-
-const SkillsSection = styled(motion.section)`
-  margin-bottom: 4rem;
-`;
-
-const SectionTitle = styled(motion.h2)`
-  font-size: 2rem;
-  color: ${props => props.theme.colors.primary};
-  text-align: center;
-  margin-bottom: 2rem;
-`;
-
-const SkillsList = styled(motion.ul)`
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
-`;
-
-const SkillItem = styled(motion.li)`
-  background: white;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: ${props => props.theme.shadows.md};
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+
+  svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+`
+
+const CardContent = styled.div`
+  color: ${props => props.theme.colors.gray[700]};
+  line-height: 1.6;
+`
+
+const SocialLinks = styled.div`
+  display: flex;
   gap: 1rem;
-`;
+  justify-content: center;
+  margin-top: 1rem;
+`
 
-const Emoji = styled.span`
+const SocialLink = styled.a`
+  color: ${props => props.theme.colors.primary};
   font-size: 1.5rem;
-`;
+  transition: color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-const SkillText = styled(motion.span)`
-  font-size: 1.1rem;
-  color: ${props => props.theme.colors.text};
-`;
-
-// Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.2
-    }
+  svg {
+    width: 1.5em;
+    height: 1.5em;
   }
-};
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut"
-    }
+  &:hover {
+    color: ${props => props.theme.colors.primaryDark};
   }
-};
-
-const profileImageVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-};
-
-const textVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: "easeOut"
-    }
-  }
-};
-
-const skillsListVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const skillItemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.3,
-      ease: "easeOut"
-    }
-  }
-};
+`
 
 const Author = () => {
-  const skills = [
-    { emoji: '💻', text: 'Software Development' },
-    { emoji: '🎮', text: 'Game Development' },
-    { emoji: '🎨', text: 'UI/UX Design' },
-    { emoji: '📱', text: 'Mobile Development' },
-    { emoji: '🌐', text: 'Web Development' },
-    { emoji: '❤️', text: 'Love Sheila Forever' },
-  ];
-
   return (
-    <Container
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
-      <ProfileSection variants={itemVariants}>
-        <ProfileImage 
-          src={profileImage} 
-          alt="Author Profile"
-          variants={profileImageVariants}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        />
-        <Name variants={textVariants}>Crisbel Enriquez</Name>
-        <Title variants={textVariants}>Software Engineer & Love Expert</Title>
-        <Bio variants={textVariants}>
-          Hi! I'm Crisbel, a passionate software engineer who loves creating beautiful and functional applications.
-          When I'm not coding, you can find me thinking about Sheila, playing games, or learning new technologies.
-          But mostly thinking about Sheila. Actually, that's all I do. HAHAHA
-        </Bio>
-      </ProfileSection>
-
-      <SkillsSection variants={itemVariants}>
-        <SectionTitle variants={textVariants}>My Skills</SectionTitle>
-        <SkillsList variants={skillsListVariants}>
-          {skills.map((skill, index) => (
-            <SkillItem
-              key={index}
-              variants={skillItemVariants}
-              whileHover={{ 
-                scale: 1.03,
-                boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
+    <PageContainer>
+      <ContentWrapper>
+        <ProfileSection>
+          <ImageContainer>
+            <ProfileImage 
+              src={profileImage} 
+              alt="Cris"
+              onError={(e) => {
+                e.target.src = 'https://via.placeholder.com/250x250'
               }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Emoji>{skill.emoji}</Emoji>
-              <SkillText variants={textVariants}>{skill.text}</SkillText>
-            </SkillItem>
-          ))}
-        </SkillsList>
-      </SkillsSection>
-    </Container>
-  );
-};
+            />
+          </ImageContainer>
+          <Name>Crisbel A. Mendoza</Name>
+          <Nickname>"Papa de Azucar"</Nickname>
+          <Nickname>"Codename: kirisuberu"</Nickname>
+          <Title style={{marginBottom: '0'}}>Developer of Sheilalabs Website</Title>
+          <Title>Lover of Sheila</Title>
+        </ProfileSection>
 
-export default Author;
+        <Grid>
+          <Card>
+            <CardTitle>
+              <Heart size={24} />
+              Personal Message
+            </CardTitle>
+            <CardContent>
+              <p>
+                "Hello, I'm Crisbel. I'm a passionate developer and lover of technology. I am deeply in love with what the girl named Sheila Marie Junco. I love her so much. She's the best, kaperfect nalang gyud! Sana mahalin niya ako for her whole life!, PLEAAAAAAAAAAAAAAASSSSSSSSSSSEEE"
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardTitle>
+              <Sparkles size={24} />
+              About Me
+            </CardTitle>
+            <CardContent>
+              <p>
+                Future Papa de Azucar ni Sheila. That is my goal in life!
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardTitle>
+              <Star size={24} />
+              Interests & Hobbies
+            </CardTitle>
+            <CardContent>
+              <ul style={{ listStyleType: 'none', padding: 0 }}>
+                <li>🎨 Drawing while Loving Sheila</li>
+                <li>🎮 Gaming while Loving Sheila</li>
+                <li>🎵 Listening to music while Loving Sheila</li>
+                <li>👨‍💻Programming while Loving Sheila</li>
+                <li>❤️ LOVIIINNNNGGGG SHEEEIILLLLLAAAA!!</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardTitle>
+              <HandshakeIcon size={24} />
+              Connect With Me
+            </CardTitle>
+            <CardContent>
+              <p>I'd love to connect with you! Feel free to reach out through any of these platforms:</p>
+              <SocialLinks>
+                <SocialLink href="mailto:crisbelm16@gmail.com" target="_blank" rel="noopener noreferrer">
+                  <Mail />
+                </SocialLink>
+                <SocialLink href="https://github.com/kirisuberu" target="_blank" rel="noopener noreferrer">
+                  <Github />
+                </SocialLink>
+              </SocialLinks>
+              <p style={{ marginTop: '1rem' }}>Joke lang, Bawal magconnect-connect ang girls. HEHEHEHE</p>
+            </CardContent>
+          </Card>
+        </Grid>
+      </ContentWrapper>
+    </PageContainer>
+  )
+}
+
+export default Author
